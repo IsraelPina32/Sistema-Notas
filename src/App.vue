@@ -17,13 +17,16 @@
         </form>
 
         <NoteCard v-for="note in notes" :note="note" :key="note.id" @edit="handleEdit" @delete="handleDelete" />
+        <TrashBin :trash="trash" @restore="restoreFromTrash"/>
     </section>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import NoteCard from './components/NoteCard.vue'
+import TrashBin from './components/TrashBin.vue'
 
+const trash = ref([])
 
 const notes = ref([
     { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28'}])
@@ -67,34 +70,34 @@ const handleEdit = (note) => {
 }
 
 const handleDelete = (note) => {
-    const trash = JSON.parse(localStorage.getItem('trash') || '[]')
-    trash.push(note)
-    localStorage.setItem('trash', JSON.stringify(trash))
 
+    trash.value.push(note)
+    localStorage.setItem('trash', JSON.stringify(trash.value))
 
     notes.value = notes.value.filter(n => n.id !== note.id)
     saveNotes()
 }
 
 const restoreFromTrash = (noteID) => {
-    const trash = JSON.parse(localStorage.getItem('trash') || '[]')
-    const note = trash.find(n => n.id === noteID)
-    if(note) {
+    const index = trash.value.findIndex(n => n.id === noteID)
+    if(index !== -1) {
+        const note = trash.value.splice(index, 1)[0]
         notes.value.push(note)
         saveNotes()
-        localStorage.setItem('trash', JSON.stringify(trash.filter(n => n.id !== noteID)))
     }
 }
 
 const saveNotes = () => {
-    localStorage.setItem('notes', JSON.stringify(notes.value))
+    localStorage.setItem('notes', JSON.stringify(notes.value));
+    localStorage.setItem('trash', JSON.stringify(trash.value));
 }
 
 onMounted(() => {
-    const  saved = localStorage.getItem('notes')
-    if (saved) {
-        notes.value = JSON.parse(saved)
-    }
+    const saved = localStorage.getItem('notes')
+
+    const trashData = localStorage.getItem('trash');
+    if (saved) notes.value = JSON.parse(saved)
+    if (trashData) trash.value = JSON.parse(trashData)
 })
 
 </script>

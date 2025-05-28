@@ -26,9 +26,7 @@ import NoteCard from './components/NoteCard.vue'
 
 
 const notes = ref([
-    { id: 1, title: 'Aprender Vue.js', content: 'Estudar componentes e eventos', createdAt: '2025-04-17', },
-    { id: 2, title: 'Revisar JavaScript', content: 'Conceitos com classes, async/await e promises', createdAt: '2025-04-16' },
-    { id: 3, title: 'Aprender FluterFlow', content: "Estudar componentes e eventos", createdAt: "2025-04-15" }])
+    { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28'}])
 const newNote = ref({ title: '', content: '' })
 const isEditing = ref(false)
 const editId = ref(null)
@@ -41,7 +39,7 @@ const addNote = () => {
         if (index !== -1) {
             notes.value[index] = {
                 ...notes.value[index],
-                title: newNote.value.titile,
+                title: newNote.value.title,
                 content: newNote.value.content,
             }
         }
@@ -69,8 +67,23 @@ const handleEdit = (note) => {
 }
 
 const handleDelete = (note) => {
+    const trash = JSON.parse(localStorage.getItem('trash') || '[]')
+    trash.push(note)
+    localStorage.setItem('trash', JSON.stringify(trash))
+
+
     notes.value = notes.value.filter(n => n.id !== note.id)
     saveNotes()
+}
+
+const restoreFromTrash = (noteID) => {
+    const trash = JSON.parse(localStorage.getItem('trash') || '[]')
+    const note = trash.find(n => n.id === noteID)
+    if(note) {
+        notes.value.push(note)
+        saveNotes()
+        localStorage.setItem('trash', JSON.stringify(trash.filter(n => n.id !== noteID)))
+    }
 }
 
 const saveNotes = () => {
@@ -79,7 +92,6 @@ const saveNotes = () => {
 
 onMounted(() => {
     const  saved = localStorage.getItem('notes')
-
     if (saved) {
         notes.value = JSON.parse(saved)
     }

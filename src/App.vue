@@ -3,7 +3,12 @@
         <h1 class="text-2xl font-bold mb-4 text-neutral-800">Minhas Notas</h1>
 
         <NoteForm :note="newNote" :isEditing="isEditing" @submit="addNote"/>
-        <NoteCard v-for="note in notes" :note="note" :key="note.id" @edit="handleEdit" @delete="handleDelete" />
+     
+        <NoteList
+            :notes="notes"
+            @edit="handleEdit"
+            @delete="handleDelete"
+        />
         <TrashBin :trash="trash" @restore="restoreFromTrash" @permanent-delete="permanentlyDeleteNote"/>
     </section>
 </template>
@@ -11,7 +16,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import NoteForm from './components/NoteForm.vue'
-import NoteCard from './components/NoteCard.vue'
+import NoteList from './components/NoteList.vue'
 import TrashBin from './components/TrashBin.vue'
 
 const trash = ref([])

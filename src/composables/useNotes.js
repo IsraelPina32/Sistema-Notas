@@ -1,10 +1,13 @@
 import { ref, onMounted } from 'vue';
+import { useStorage } from './UseStorage';
+
+const defaultNotes = ref([
+    { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28' }])
 
 export function useNotes() {
-    const trash = ref([])
 
-    const notes = ref([
-        { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28' }])
+    const notes = useStorage('notes', defaultNotes)
+    const trash = useStorage('trash', [])
     const newNote = ref({ title: '', content: '' })
     const isEditing = ref(false)
     const editId = ref(null)

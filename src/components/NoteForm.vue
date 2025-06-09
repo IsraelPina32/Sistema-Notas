@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-    import { ref, defineEmits, defineProps, watch } from 'vue'
+    import { ref, defineProps, watch } from 'vue'
 
     const props = defineProps({
         note: {

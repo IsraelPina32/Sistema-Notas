@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-    import { ref, defineProps, watch } from 'vue'
+    import { ref, watch } from 'vue'
 
     const props = defineProps({
         note: {
@@ -37,7 +37,8 @@
     () => props.note,
     (newValue) => {
         if (newValue) {
-            form.value = { ...newValue};
+            form.value.title = newValue.title || '';
+            form.value.content = newValue.content || '';
         }
     },
     { immediate: true}

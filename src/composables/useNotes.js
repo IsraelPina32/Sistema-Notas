@@ -1,4 +1,5 @@
 import { ref, onMounted } from 'vue';
+import { useToast } from 'vue-toastification';
 import { useStorage } from './UseStorage';
 
 const defaultNotes = ref([
@@ -11,6 +12,7 @@ export function useNotes() {
     const newNote = ref({ title: '', content: '' })
     const isEditing = ref(false)
     const editId = ref(null)
+    const toast = useToast();
     const addNote = (noteData) => {
         if (!noteData.title || !noteData.content) return
 
@@ -22,6 +24,7 @@ export function useNotes() {
                     title: noteData.title,
                     content: noteData.content,
                 }
+                toast.success('Nota atualizada com sucesso!', {timeout: 2000})
             }
             isEditing.value = false
             editId.value = null
@@ -32,6 +35,7 @@ export function useNotes() {
                 content: noteData.content,
                 createdAt: new Date().toISOString().slice(0, 10),
             })
+            toast.success('Nota adicionada com sucesso!', {timeout: 2000})
         }
 
         newNote.value = { title: '', content: '' }
@@ -53,6 +57,7 @@ export function useNotes() {
 
         notes.value = notes.value.filter(n => n.id !== note.id)
         saveNotes()
+        toast.info('Nota movida para a lixeira!', {timeout: 2000})
     }
 
     const restoreFromTrash = (noteID) => {
@@ -62,11 +67,13 @@ export function useNotes() {
             notes.value.push(note)
             saveNotes()
         }
+        toast.success('Nota restaurada com sucesso!', {timeout: 2000})
     }
 
     const permanentlyDeleteNote = (noteId) => {
         trash.value = trash.value.filter(n => n.id !== noteId)
         saveNotes()
+        toast.success('Nota excluída permanentemente!', {timeout: 2000})
     }
 
     const saveNotes = () => {

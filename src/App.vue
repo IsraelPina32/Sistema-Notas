@@ -1,22 +1,22 @@
 <template>
-    <div class="fixed top-4 left-1/2 z-50 mb-4 w-full max-w-lg px-4 -translate-x-1/2 transform">
+    <div class="fixed top-4 left-1/2 z-50 mb-4 w-full max-w-lg px-4  -translate-x-1/2 transform sm:px-6 md:max-w-xl lg:max-w-2xl">
         <div class="relative">
             <input
                    ref="searchInput"
                    v-model="searchQuery"
                    type="text"
                    placeholder="🔍 Buscar sua nota por título, conteúdo ou data"
-                   class="w-full p-2 rounded-xl border-neutral-300 mb-4 bg-neutral-100 text-gray-800 shadow-md  transition focus:ring-2 focus-ring-gray-500"
+                   class="w-full p-2 sm:p-3 rounded-xl border-neutral-300 mb-4 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition focus:ring-2 focus-ring-gray-500"
                />
-            <span class="text-xs text-gray-400 dark:text-neutral-500 absolute right-5 top-1/3 -translate-y-1.75">
+            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-5 top-1/3 -translate-y-1.75 pointer-events-none">
                 Ctrl + K
             </span>
         </div>
 
     </div>
-    <div class="fixed  top-4 right-90 z-50">
+    <div class="fixed  top-[70px] sm:top-5 right-[250px] sm:right-8  lg:right-12 z-50">
        
-        <button @click="toogleDark" class="flex items-center gap-2 p-2">
+        <button @click="toogleDark" class="flex items-center gap-2 p-2 rounded-full  hover:ring-2 :hover:ring-neutral-300">
             <Transition name="fade" mode="out-in">
                 <SunIcon v-if="!isDark" key="sun" />
                 <MoonIcon v-else key="moon" />
@@ -24,12 +24,12 @@
         </button>
     </div>
 
-    <section class="max-w-full mx-auto p-4">
+    <section class="w-full max-w-4xl mx-auto p-4 sm:px-8 py-4">
 
-        <h1 class="text-3xl font-bold m-2 text-gray-600 dark:text-neutral-200">Minhas Notas</h1>
+        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold m-2 text-gray-600 dark:text-neutral-200">Minhas Notas</h1>
 
         <NoteForm :note="newNote" :isEditing="isEditing" @submit="addNote" />
-        <NoteList :notes="filteredNotes" @edit="handleEdit" @delete="handleDelete" />
+        <NoteList :notes="filteredNotes" @edit="handleEdit" @delete="handleDelete" @favorite="toggleFavorite" />
         <TrashBin :trash="trash" @restore="restoreFromTrash" @permanent-delete="permanentlyDeleteNote" />
     </section>
 </template>
@@ -42,15 +42,14 @@ import { useNotes } from './composables/useNotes.js'
 import { useDarkMode } from './composables/useDarkMode.js'
 import MoonIcon from './components/icons/MoonIcon.vue'
 import SunIcon from './components/icons/SunIcon.vue'
-import { onMounted, ref, Transition, watch,computed, onUnmounted } from 'vue'
+import { onMounted, ref, watch,computed, onUnmounted } from 'vue'
 
 const { isDark } = useDarkMode();
 
 const searchQuery = ref('');
 const searchInput = ref(null);
-
 const lottieRef = ref(null);
-
+const showFavoriteItesOnly = ref(false);
 
 
 const filteredNotes = computed(() => {
@@ -59,11 +58,17 @@ const filteredNotes = computed(() => {
 
     const query = searchQuery.value.toLocaleLowerCase();
     return notes.value.filter(note => {
-        return note.title.toLowerCase().includes(query) ||
+        const matchesQuery = note.title.toLowerCase().includes(query) ||
             note.content.toLowerCase().includes(query) ||
             note.createdAt.toLowerCase().includes(query);
+
+            const matchesFavorite = showFavoriteItesOnly.value ? note.favorite : true;
+        
+            return matchesQuery && matchesFavorite 
+        })
+        
+        
     })
-})
 
 const handleShortCut = (event) => {
     if (event.ctrlKey && event.key === 'k') {
@@ -104,7 +109,8 @@ const {
     handleEdit,
     handleDelete,
     restoreFromTrash,
-    permanentlyDeleteNote
+    permanentlyDeleteNote,
+    toggleFavorite
 } = useNotes();
 
 </script>

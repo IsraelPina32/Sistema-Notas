@@ -34,6 +34,7 @@ export function useNotes() {
                 title: noteData.title,
                 content: noteData.content,
                 createdAt: new Date().toISOString().slice(0, 10),
+                favorite: false
             })
             toast.success('Nota adicionada com sucesso!', {timeout: 2000})
         }
@@ -64,6 +65,7 @@ export function useNotes() {
         const index = trash.value.findIndex(n => n.id === noteID)
         if (index !== -1) {
             const note = trash.value.splice(index, 1)[0]
+            if (typeof note.favorite === 'undefined') note.favorite = false;
             notes.value.push(note)
             saveNotes()
         }
@@ -81,6 +83,14 @@ export function useNotes() {
         localStorage.setItem('trash', JSON.stringify(trash.value));
     }
 
+    const toggleFavorite = (noteId) => {
+        const note = notes.value.find(n => n.id === noteId);
+        if (note) {
+            note.favorite = !note.favorite;
+            saveNotes();
+        }
+    }
+
     onMounted(() => {
         const saved = localStorage.getItem('notes')
 
@@ -88,6 +98,7 @@ export function useNotes() {
         if (saved) notes.value = JSON.parse(saved)
         if (trashData) trash.value = JSON.parse(trashData)
     })
+
 
     return {
         notes,
@@ -99,5 +110,6 @@ export function useNotes() {
         handleDelete,
         restoreFromTrash,
         permanentlyDeleteNote,
+        toggleFavorite,
     }
 }

@@ -68,9 +68,7 @@ const filteredNotes = computed(() => {
             const matchesFavorite = showFavoriteItesOnly.value ? note.favorite : true;
         
             return matchesQuery && matchesFavorite 
-        })
-        
-        
+        })       
     })
 
 const handleShortCut = (event) => {

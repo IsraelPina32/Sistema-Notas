@@ -16,10 +16,10 @@
                        @blur="isSearchActive =  false"
                        type="text"
                        placeholder="🔍 Buscar sua nota por título, conteúdo ou data"
-                       :class="['w-3/4 sm:w-full max-w-lg pl-10 p-2 sm:p-3 rounded-xl border-neutral-300 mb-4 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105' : 'border-transparent' ]"
+                       :class="['w-full h-full max-x-lg sm:w-full max-w-lg pl-10 p-2 sm:p-3 rounded-xl sm:pl-10 border-neutral-300 mb-4 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
                    />
             </div>
-            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-16 top-6 -translate-y-1/2 pointer-events-none transition-all dura" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
+            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 sm:right-18 top-6 sm:top-6 -translate-y-1/2 pointer-events-none transition-all duration-300" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
                 Ctrl + K
             </span>
         </div>

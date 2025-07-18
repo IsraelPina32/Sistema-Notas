@@ -15,16 +15,16 @@
                        @focus="isSearchActive = true"
                        @blur="isSearchActive =  false"
                        type="text"
-                       placeholder="🔍 Buscar sua nota por título, conteúdo ou data"
-                       :class="['w-full h-full max-x-lg sm:w-full max-w-lg pl-10 p-2 sm:p-3 rounded-xl sm:pl-10 border-neutral-300 mb-4 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
+                       placeholder="Procure a sua nota.🔍"
+                       :class="['w-full sm:w-full max-w-lg pl-10 m-4 p-3 sm:p-3 rounded-xl sm:pl-10 border-neutral-300 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
                    />
             </div>
-            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 sm:right-18 top-6 sm:top-6 -translate-y-1/2 pointer-events-none transition-all duration-300" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
+            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 sm:right-18 top-9/18 sm:top-9/18 -translate-y-1/2 pointer-events-none transition-all duration-300" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
                 Ctrl + K
             </span>
         </div>
     </div>
-    <div class="fixed  top-[70px] sm:top-5 right-[250px] sm:right-8  lg:right-12 z-50">
+    <div class="fixed  top-[100px] sm:top-8 right-[250px] sm:right-8  lg:right-12 z-50">
         <button @click="toogleDark" class="flex items-center gap-2 p-2 rounded-full  hover:ring-2 :hover:ring-neutral-300">
             <Transition name="fade" mode="out-in">
                 <SunIcon v-if="!isDark" key="sun" />

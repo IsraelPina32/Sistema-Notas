@@ -1,14 +1,14 @@
 <template>
      <form @submit.prevent="handleSubmit">
             <div>
-                <label class="block dark:text-gray-400 text-gray-500 mb-3">Titulo da Nota</label>
-                <input v-model="form.title" type="text" class="border p-2 w-full text-neutral-700 bg-neutral-100 border-neutral-300 mb-2  rounded-2xl" placeholder="Digite o titulo da sua nota.">
+                <label class="block dark:text-gray-400 text-gray-500 mb-3 font-medium">Titulo da Nota</label>
+                <input v-model="form.title" type="text" class="border p-2.5 w-full text-neutral-800 bg-neutral-100 border-neutral-300 mb-3  rounded-2xl" placeholder="Digite o titulo da sua nota.">
             </div>
             <div>
-                <label class="block dark:text-gray-400 text-gray-500 mb-3">Conteúdo da Nota</label>
-                <textarea v-model="form.content" class="border p-1 w-full bg-neutral-100  border-neutral-300 text-neutral-700 mb-2 rounded-2xl" placeholder="Digite a sua nota"></textarea>
+                <label class="block dark:text-gray-400 text-gray-500 mb-3 font-medium">Conteúdo da Nota</label>
+                <textarea v-model="form.content" class="border p-2.5 w-full bg-neutral-100  border-neutral-300 text-neutral-800 mb-2 rounded-2xl" placeholder="Digite a sua nota"></textarea>
             </div>
-            <button type="submit" class="bg-neutral-100 border border-neutral-300 text-neutral-700  mb-2 p-2 rounded-2xl">
+            <button type="submit" class="bg-neutral-100 border border-neutral-300 text-neutral-700  mb-2 p-2.5 rounded-3xl">
                 {{  isEditing ? 'Salvar' : 'Adicionar' }}
             </button>
         </form>

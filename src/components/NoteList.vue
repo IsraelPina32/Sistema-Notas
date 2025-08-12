@@ -21,7 +21,6 @@ const props = defineProps({
     }
 })
 
-
 const emit = defineEmits(['edit', 'delete', 'favorite'])
 
 const handleEdit = (note) => {

@@ -58,7 +58,7 @@ export function useNotes() {
 
         notes.value = notes.value.filter(n => n.id !== note.id)
         saveNotes()
-        toast.info('Nota movida para a lixeira!', {timeout: 2000})
+        toast.warning('Nota movida para a lixeira!', {timeout: 2000})
     }
 
     const restoreFromTrash = (noteID) => {
@@ -75,7 +75,7 @@ export function useNotes() {
     const permanentlyDeleteNote = (noteId) => {
         trash.value = trash.value.filter(n => n.id !== noteId)
         saveNotes()
-        toast.success('Nota excluída permanentemente!', {timeout: 2000})
+        toast.error('Nota excluída permanentemente!', {timeout: 2000})
     }
 
     const saveNotes = () => {

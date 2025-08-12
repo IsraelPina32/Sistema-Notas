@@ -15,7 +15,7 @@
                        @focus="isSearchActive = true"
                        @blur="isSearchActive =  false"
                        type="text"
-                       placeholder="Procure a sua nota.🔍"
+                       placeholder="Procure a sua nota 📩"
                        :class="['w-full sm:w-full max-w-lg pl-10 m-4 p-3 sm:p-3 rounded-xl sm:pl-10 border-neutral-300 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
                    />
             </div>
@@ -24,7 +24,7 @@
             </span>
         </div>
     </div>
-    <div class="fixed  top-[100px] sm:top-8 right-[250px] sm:right-8  lg:right-12 z-50">
+    <div class="fixed top-[100px] sm:top-8 right-[250px] sm:right-8  lg:right-12 z-50">
         <button @click="toogleDark" class="flex items-center gap-2 p-2 rounded-full  hover:ring-2 :hover:ring-neutral-300">
             <Transition name="fade" mode="out-in">
                 <SunIcon v-if="!isDark" key="sun" />

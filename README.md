@@ -37,8 +37,8 @@
 > **Light and dark mode views with search and favorite highlights:**
 
 <p align="center">
-  <img src="https://placehold.co/800x400?text=Light+Mode+Screenshot" alt="Light Mode" width="400"/>
-  <img src="https://placehold.co/800x400?text=Dark+Mode+Screenshot" alt="Dark Mode" width="400"/>
+  <img src="./src/assets/sistema-de-notas-light.png" alt="Light Mode" width="400"/>
+  <img src="./src/assets/sistema-de-notas-dark.png" alt="Dark Mode" width="400"/>
 </p>
 
 ---

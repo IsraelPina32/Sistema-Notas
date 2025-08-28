@@ -1,14 +1,13 @@
 <template>
     <div
      v-if="isSearchActive"
-     @click="isSearchActive = false"
+     @click.self="isSearchActive = false"
      class="fixed inset-0 z-40 backdrop-blur-sm bg-black/30 transition-opacity duration-300"
     >
 
     </div>
-    <div class="fixed top-4 left-1/2 z-50 mb-4 w-full max-w-lg px-4  -translate-x-1/2 transform sm:px-6 md:max-w-xl lg:max-w-2xl">
-        <div class="relative">
-            <div :class="['relative rounded-xl transition-all duration-300 overflow-hidden fade-gradient', isSearchActive ? 'backdrop-blur-md bg-gradient-to-br from-white/60 via-white/50 to-white/30 dark:from-neutral-600/40 dark:via-neutral-800/30 dark:to-neutral-900/20 border border-white/40 dark:border-black/20 shadow-lg' : 'border border-transparent']">
+    <header class="grid grid-cols-2 md:grid-cols-[1fr_max-content] items-center gap-2 p-4 max-w-4xl mx-auto w-full relative">
+        <div class="relative w-full z-50">
                 <input
                        ref="searchInput"
                        v-model="searchQuery"
@@ -16,22 +15,21 @@
                        @blur="isSearchActive =  false"
                        type="text"
                        placeholder="Procure a sua nota 📩"
-                       :class="['w-full sm:w-full max-w-lg pl-10 m-4 p-3 sm:p-3 rounded-xl sm:pl-10 border-neutral-300 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
+                       :class="['w-full cursor-text p-3 rounded-xl border border-neutral-300 bg-neutral-100  text-gray-800  shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent' ]"
                    />
-            </div>
-            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 sm:right-18 top-9/18 sm:top-9/18 -translate-y-1/2 pointer-events-none transition-all duration-300" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
+            <span class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300" :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive}">
                 Ctrl + K
             </span>
         </div>
-    </div>
-    <div class="fixed top-[100px] sm:top-8 right-[250px] sm:right-8  lg:right-12 z-50">
-        <button @click="toogleDark" class="flex items-center gap-2 p-2 rounded-full  hover:ring-2 :hover:ring-neutral-300">
-            <Transition name="fade" mode="out-in">
-                <SunIcon v-if="!isDark" key="sun" />
-                <MoonIcon v-else key="moon" />
-            </Transition>
-        </button>
-    </div>
+        <div class="flex justify-end w-[60px]">
+            <button @click="toogleDark" class="p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-neutral-300 pointer-events-auto">
+                <Transition name="fade" mode="out-in">
+                    <SunIcon v-if="!isDark" key="sun" />
+                    <MoonIcon v-else key="moon" />
+                </Transition>
+            </button>
+        </div>
+    </header>
 
     <section :class="[
         'w-full max-w-4xl mx-auto p-4 sm:px-8 py-4', isSearchActive ? 'backdrop-blur-sm rounded-xl pointer-events-none' : 'border-transparent'

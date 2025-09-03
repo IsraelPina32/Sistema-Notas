@@ -1,6 +1,6 @@
 <template>
     <div
-        class="bg-neutral-100 border border-neutral-300  rounded-2xl p-7 mb-6 shadow-sm transition md:shadow-md flex justify-center items-center w-md">
+        class="bg-neutral-100 border border-neutral-300  rounded-2xl p-7 mb-6 shadow-sm transition md:shadow-md flex justify-center items-center flex-col sm:flex-row gap-4 w-full max-w-3xl mx-auto">
         <div class="flex-1 p-1">
             <h2 class="text-lg font-semibold text-neutral-700  break-words">
                 {{ note.title }}.
@@ -8,10 +8,10 @@
             <p class="text-neutral-700">{{ note.content }}</p>
             <p class="text-xs text-neutral-700 font-mono ">{{ note.createdAt }}</p>
         </div>
-        <div class="flex flex-col gap-2 p-2">
-            <button @click="$emit('edit', note)" class="text-stone-500">Editar</button>
-            <button @click="$emit('delete', note)" class="text-stone-500">Excluir</button>
-            <button class="relative flex items-center justify-center w-10 h-10" @click="$emit('favorite', note.id)"
+        <div class="flex flex-col justify-center items-center gap-2 p-2">
+            <button @click="$emit('edit', note)" class="text-sm text-stone-500">Editar</button>
+            <button @click="$emit('delete', note)" class="text-stone-500 text-sm">Excluir</button>
+            <button class="relative flex  items-center justify-center w-10 h-10" @click="$emit('favorite', note.id)"
                 :arial-label="note.favorite ? 'Desfavoritar' : 'Favoritar'">
                 <Transition name="scale">
                     <svg v-if="note.favorite" key="filled" xmlns="http://www.w3.org/2000/svg"

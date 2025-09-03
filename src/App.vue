@@ -6,7 +6,7 @@
     >
 
     </div>
-    <header class="grid grid-cols-2 md:grid-cols-[1fr_max-content] items-center gap-2 p-4 max-w-4xl mx-auto w-full relative">
+    <header class="grid grid-cols-2 md:grid-cols-[1fr_max-content] items-center justify-center gap- p-4 max-w-4xl mx-auto w-full relative">
         <div class="relative w-full z-50">
                 <input
                        ref="searchInput"
@@ -32,10 +32,10 @@
     </header>
 
     <section :class="[
-        'w-full max-w-4xl mx-auto p-4 sm:px-8 py-4', isSearchActive ? 'backdrop-blur-sm rounded-xl pointer-events-none' : 'border-transparent'
+        'w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-10', isSearchActive ? 'backdrop-blur-sm rounded-xl pointer-events-none' : 'border-transparent'
     ]">
 
-        <h1 class="text-xl sm:text-2xl lg:text-3xl font-bold mt-10 text-gray-600 dark:text-neutral-200">Minhas Notas</h1>
+        <h1 class="flex items-center justify-center gap-2 text-2xl sm:text-2xl lg:text-3xl font-bold my-6 sm:my-8 lg:my-12 text-gray-600 dark:text-neutral-200 text-center md:text-left">Minhas Notas</h1>
 
         <NoteForm :note="newNote" :isEditing="isEditing" @submit="addNote" />
         <NoteList :notes="filteredNotes" @edit="handleEdit" @delete="handleDelete" @favorite="toggleFavorite" />

@@ -1,5 +1,5 @@
 <template>
-    <div class="grid  gap-4 mt-4">
+    <div class="grid  gap-6 mt-4 grid-cols=[repeat(auto-fit,minmax(250px,1fr))]">
         <NoteCard
             v-for="note in notes"
             :key="note.id"

@@ -9,7 +9,7 @@
                 <textarea v-model="form.content" class="border p-2.5 w-full bg-neutral-100  border-neutral-300 text-neutral-800 mb-2 rounded-2xl" placeholder="Digite a sua nota"></textarea>
             </div>
             <div class="sm:col-span-2 flex justify-center">
-                <button type="submit" class="bg-neutral-100 border border-neutral-300 text-neutral-700  mb-2 p-2.5 rounded-3xl">
+                <button type="submit" class="bg-neutral-100 border border-neutral-300 text-neutral-700  mb-2 p-3 rounded-2xl">
                     {{  isEditing ? 'Salvar' : 'Adicionar' }}
                 </button>
             </div>

@@ -122,7 +122,7 @@ const {
 </script>
 
 <style scoped>
-.fade-gradient {
+    .fade-gradient {
   transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-</style>
+</style>;

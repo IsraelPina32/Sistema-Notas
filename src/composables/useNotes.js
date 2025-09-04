@@ -3,7 +3,11 @@ import { useToast } from 'vue-toastification';
 import { useStorage } from './UseStorage';
 
 const defaultNotes = ref([
-    { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28' }])
+    { id: 1, title: 'Primeira Nota neste WebSite!', content: 'Pode me apagar ou deixar sua linda nota aqui!', createdAt: '2025-05-28' 
+
+}])
+
+const MAX_TRASH_ITEMS = 12;
 
 export function useNotes() {
 
@@ -53,11 +57,17 @@ export function useNotes() {
 
     const handleDelete = (note) => {
 
+        if (trash.value.length >= MAX_TRASH_ITEMS) {
+            toast.error('A lixeira está cheia! Exclua algumas notas permanentemente antes de adicionar mais!', {timeout: 3000});
+            return;
+        }
+
         trash.value.push(note)
-        localStorage.setItem('trash', JSON.stringify(trash.value))
 
         notes.value = notes.value.filter(n => n.id !== note.id)
+
         saveNotes()
+
         toast.warning('Nota movida para a lixeira!', {timeout: 2000})
     }
 

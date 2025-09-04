@@ -6,11 +6,11 @@
                 {{ note.title }}.
             </h2>
             <p class="text-neutral-700">{{ note.content }}</p>
-            <p class="text-xs text-neutral-700 font-mono ">{{ note.createdAt }}</p>
+            <p class="text-sm text-neutral-700 font-mono ">{{ note.createdAt }}</p>
         </div>
         <div class="flex flex-col justify-center items-center gap-2 p-2">
-            <button @click="$emit('edit', note)" class="text-sm text-stone-500">Editar</button>
-            <button @click="$emit('delete', note)" class="text-stone-500 text-sm">Excluir</button>
+            <button @click="$emit('edit', note)" class="text-base text-stone-600">Editar</button>
+            <button @click="$emit('delete', note)" class="text-base text-stone-600">Excluir</button>
             <button class="relative flex  items-center justify-center w-10 h-10" @click="$emit('favorite', note.id)"
                 :arial-label="note.favorite ? 'Desfavoritar' : 'Favoritar'">
                 <Transition name="scale">

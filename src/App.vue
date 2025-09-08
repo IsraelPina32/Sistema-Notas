@@ -143,4 +143,21 @@ const toogleDark = () => {
 .fade-gradient {
     transition: background 0.5s ease, backdrop-filter 0.5s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
-</style>;
+
+.fade-zoom-enter-active,
+.fade-zoom-leave-active {
+    transition: all 0.3s ease;
+}
+
+.fade-zoom-enter-from,
+.fade-zoom-leave-to {
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.fade-zoom-enter-to,
+.fade-zoom-leave-from {
+    opacity: 1;
+    transform: scale(1);
+}
+</style>

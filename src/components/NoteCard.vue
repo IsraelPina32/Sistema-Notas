@@ -1,6 +1,7 @@
 <template>
     <div
-        class="bg-neutral-100 border border-neutral-300  rounded-2xl p-7 mb-6 shadow-sm transition md:shadow-md grid justify-center items-center grid-cols-1 sm:grid-cols-[1fr_max-content] gap-4 w-full max-w-3xl mx-auto ">
+        class="cursor-pointer bg-neutral-100 border border-neutral-300  rounded-2xl p-7 mb-6 shadow-sm transition md:shadow-md grid justify-center items-center grid-cols-1 sm:grid-cols-[1fr_max-content] gap-4 w-full max-w-3xl mx-auto" 
+        @click="handleCardClick">
         <div class="p-1">
             <h2 class="text-lg font-semibold text-neutral-700 break-words p-1">
                 {{ note.title }}.
@@ -9,9 +10,9 @@
             <p class="text-sm text-neutral-700 font-mono p-1">{{ note.createdAt }}</p>
         </div>
         <div class="flex flex-col justify-center items-center gap-2 p-2">
-            <button @click="$emit('edit', note)" class="text-base text-stone-600">Editar</button>
-            <button @click="$emit('delete', note)" class="text-base text-stone-600">Excluir</button>
-            <button class="relative flex  items-center justify-center w-10 h-10" @click="$emit('favorite', note.id)"
+            <button @click.stop="$emit('edit', note)" class="text-base text-stone-600">Editar</button>
+            <button @click.stop="$emit('delete', note)" class="text-base text-stone-600">Excluir</button>
+            <button class="relative flex  items-center justify-center w-10 h-10" @click.stop="$emit('favorite', note.id)"
                 :arial-label="note.favorite ? 'Desfavoritar' : 'Favoritar'">
                 <Transition name="scale">
                     <svg v-if="note.favorite" key="filled" xmlns="http://www.w3.org/2000/svg"
@@ -34,13 +35,16 @@
 </template>
 
 <script setup>
-defineProps({
+const props = defineProps({
     note: {
         type: Object,
         required: true,
     }
 })
-defineEmits(['edit', 'delete', 'favorite'])
+const emit = defineEmits(['edit', 'delete', 'favorite', 'open'])
+
+const handleCardClick = () =>  emit('open', props.note)
+
 import { Transition } from 'vue';
 </script>
 

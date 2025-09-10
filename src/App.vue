@@ -30,6 +30,8 @@
         <section :class="[
             'w-full max-w-4xl mx-auto p-4 sm:p-6 lg:p-10', isSearchActive ? 'backdrop-blur-sm rounded-xl pointer-events-none' : 'border-transparent'
         ]">
+
+
             <div v-if="!selectedNote">
                 <h1
                     class="flex items-center justify-center gap-2 text-2xl sm:text-2xl lg:text-3xl font-bold my-6 sm:my-8 lg:my-12 text-gray-600 dark:text-neutral-200 text-center md:text-left">
@@ -136,6 +138,7 @@ const toogleDark = () => {
     }, 100);
 
 }
+
 
 </script>
 

@@ -5,18 +5,18 @@
 
         </div>
         <header
-            class="grid grid-cols-2 md:grid-cols-[1fr_max-content] items-center justify-center gap- p-4 max-w-4xl mx-auto w-full relative">
-            <div class="relative w-full z-50">
+            class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-[1fr_max-content] items-center justify-center gap-4 p-4 sm:p-5 max-w-5xl mx-auto w-full relative">
+            <div class="relative w-full z-50 mb-3 sm:mb-0">
                 <input ref="searchInput" v-model="searchQuery" @focus="isSearchActive = true"
-                    @blur="isSearchActive = false" type="text" placeholder="Procure a sua nota 📩"
-                    :class="['w-full cursor-text p-3 rounded-xl border border-neutral-300 bg-neutral-100  text-gray-800  shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent']" />
+                    @blur="isSearchActive = false" type="text" placeholder="Procure a sua nota"
+                    :class="['w-full cursor-text p-3 rounded-xl border border-neutral-300 bg-neutral-100 text-gray-800 shadow-md text-sm sm:text-base transition-all duration-300', isSearchActive ? 'ring-2 ring-gray-500 shadow-xl scale-105 focus:outline-none' : 'border-transparent']" />
                 <span
-                    class="text-xs sm:text-sm text-gray-400 dark:text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300"
+                    class="text-sm text-gray-400 dark:text-neutral-500 absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none transition-all duration-300"
                     :class="{ 'opacity-0': isSearchActive, 'opacity-100': !isSearchActive }">
                     Ctrl + K
                 </span>
             </div>
-            <div class="flex justify-end w-[60px]">
+            <div class="flex justify-center w-full sm:w-[60px]">
                 <button @click="toogleDark"
                     class="p-2 rounded-full cursor-pointer hover:ring-2 hover:ring-neutral-300 pointer-events-auto">
                     <Transition name="fade" mode="out-in">
